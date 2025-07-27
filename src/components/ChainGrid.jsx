@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
-import { pingRpc } from "../utils/pingRpc";
+import { pingRpc } from "../hooks/pingRpc";
 import { ClipLoader } from "react-spinners";
+import chains from "../hooks/chainList";
 
-const ChainGrid = ({ chains }) => {
+const ChainGrid = () => {
   const [chainData, setChainData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+
 
   useEffect(() => {
     const checkChains = async () => {
@@ -27,15 +30,13 @@ const ChainGrid = ({ chains }) => {
     checkChains();
   }, [chains]);
 
-
   useEffect(() => {
-  if (!autoRefresh) return;
-  const interval = setInterval(() => {
-    checkChains(); 
-  }, 30000);
-  return () => clearInterval(interval);
-}, [autoRefresh]);
-
+    if (!autoRefresh) return;
+    const interval = setInterval(() => {
+      checkChains();
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [autoRefresh]);
 
   const getStatusStyle = (status, latency) => {
     if (status === "fail") return "bg-red-100 border-red-200 text-red-700";
@@ -45,40 +46,54 @@ const ChainGrid = ({ chains }) => {
   };
 
   return (
+    <>
+
+    <div>
+        <input
+        type="checkbox"
+        checked={autoRefresh}
+        onChange={() => setAutoRefresh(!autoRefresh)}
+      />{" "}
+     <label htmlFor=""> Auto-refresh every 30s</label>
+      </div>
+
+
+
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      
       {loading ? (
-        <div className="col-span-full space-y-6 text-center text-white text-lg font-medium">
+          <div className="col-span-full space-y-6 text-center text-white text-lg font-medium">
           <h2>Fetching Data...</h2>
-          <ClipLoader/>
+          <ClipLoader />
         </div>
       ) : (
-        chainData.map((chain, index) => {
-          const statusStyle = getStatusStyle(chain.status, chain.latency);
-          return (
-            <div
-              key={index}
-              className={`rounded-2xl border ${statusStyle} p-6 shadow-md hover:shadow-lg transition duration-200 hover:scale-[1.01] bg-white dark:bg-neutral-900`}
-            >
+          chainData.map((chain, index) => {
+              const statusStyle = getStatusStyle(chain.status, chain.latency);
+              return (
+                  <div
+                  key={index}
+                  className={`rounded-2xl border ${statusStyle} p-6 shadow-md hover:shadow-lg transition duration-200 hover:scale-[1.01] bg-white dark:bg-neutral-900`}
+                  >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <img
                     src={chain.logo}
                     alt={`${chain.name} logo`}
                     className="h-6 w-6"
-                  />
+                    />
                   <span className="font-semibold">{chain.name}</span>
                 </div>
                 {chain.status === "success" ? (
-                  <CheckCircleIcon className="w-6 h-6 text-green-500" />
+                    <CheckCircleIcon className="w-6 h-6 text-green-500" />
                 ) : (
-                  <XCircleIcon className="w-6 h-6 text-red-500" />
+                    <XCircleIcon className="w-6 h-6 text-red-500" />
                 )}
               </div>
 
               <div className="text-sm mb-2 break-all text-gray-700 dark:text-gray-300">
                 <span className="font-medium text-gray-800 dark:text-white">
                   RPC:
-                </span>{" "}
+                </span>
                 {chain.rpc}
               </div>
 
@@ -98,8 +113,9 @@ const ChainGrid = ({ chains }) => {
             </div>
           );
         })
-      )}
+    )}
     </div>
+    </>
   );
 };
 
