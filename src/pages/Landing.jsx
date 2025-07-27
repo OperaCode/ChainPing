@@ -136,7 +136,7 @@ const LandingPage = () => {
         {/* Final CTA */}
         <Link to="/dashboard">
           <button className="mt-12 bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-white font-semibold text-lg shadow-lg transition">
-            🚀 Launch RPC Dashboard
+            🚀 Launch ChainPing Dashboard
           </button>
         </Link>
       </main>
