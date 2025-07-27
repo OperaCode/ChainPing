@@ -9,7 +9,9 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import chains from "../hooks/chainList"; // Ensure this is an array of { name, rpc }
+import chains from "../hooks/chainList"; 
+
+
 
 const LatencyChart = () => {
   const [data, setData] = useState([]);
@@ -23,12 +25,12 @@ const LatencyChart = () => {
         chains.map(async (chain) => {
           const start = performance.now();
           try {
-            await fetch(chain.rpc, { method: "HEAD", mode: "no-cors" }); // Use `no-cors` to avoid errors
+            await fetch(chain.rpc, { method: "HEAD", mode: "no-cors" }); 
             const end = performance.now();
             const latency = Math.round(end - start);
             latencyEntry[chain.name] = latency;
           } catch (err) {
-            latencyEntry[chain.name] = null; // or -1 to represent failed ping
+            latencyEntry[chain.name] = null; 
           }
         })
       );

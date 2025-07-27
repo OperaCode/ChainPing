@@ -27,8 +27,8 @@ const Home = () => {
         {/* RPC dashboard component*/}
         <div className="">
           <ChainGrid />
-          <div>
-            <h2 className="text-xl font-bold mb-4">Latency Over Time</h2>
+          <div className="p-4">
+            <h2 className="text-xl font-bold mb-4 p-4">Latency Over Time</h2>
             <LatencyChart />
           </div>
         </div>
