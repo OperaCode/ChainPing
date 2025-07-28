@@ -1,12 +1,45 @@
-# React + Vite
+# 🌐 ChainPing – Multi-Chain RPC Monitoring Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**ChainPing** is a real-time monitoring tool designed to help Web3 developers, infrastructure teams, and node operators track the **health, uptime, and latency of blockchain RPC endpoints** across multiple networks.
 
-Currently, two official plugins are available:
+## 🚀 Why ChainPing?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+In decentralized applications, **reliable RPC endpoints** are critical. Slow or failing endpoints can lead to transaction errors, poor user experience, and degraded dApp performance. **ChainPing** solves this by giving you instant visibility into the status of your RPC providers.
 
-## Expanding the ESLint configuration
+## 🧠 Use Cases
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ✅ Detect slow or unresponsive RPC endpoints early  
+- 🔍 Compare RPC performance across chains and providers  
+- 📉 Optimize backend infrastructure for reliability and speed  
+- 🔔 Enable faster incident response for DevOps and Web3 teams  
+
+---
+
+## 🔧 Features
+
+- 📡 **Real-time RPC latency and status checks**
+- 🌐 **Multi-chain support** (Ethereum, Polygon, Binance Smart Chain, and more)
+- 📊 **Chain-specific health metrics** at a glance
+- 🛠️ **Self-hostable dashboard** for internal or public monitoring
+- 🔁 **Auto-polling** of endpoints for up-to-date data
+
+---
+
+## 🛠️ Tech Stack
+
+| Tool        | Description              |
+|-------------|--------------------------|
+| React ⚛️     | Frontend UI              |
+| TailwindCSS 🌬️ | Styling Framework        |
+| ethers.js 🔌  | Blockchain interaction   |
+| Wagmi 🧩      | Web3 Wallet Support      |
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/OperaCode/ChainPing.git
+cd chainping
+npm install
+npm run dev
